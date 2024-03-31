@@ -26,6 +26,15 @@ void izpis_KMPnext(const int* polje, int len) {
     out << endl;
 }
 
+string reverseString(std::string& str) {
+    int n = str.length();
+    for (int i = 0; i < n / 2; ++i) {
+        char temp = str[i];
+        str[i] = str[n - i - 1];
+        str[n - i - 1] = temp;
+    }
+    return str;
+}
 
 void KMP(const string& text, const string& vzorec) {
     /*
@@ -76,9 +85,11 @@ void KMP(const string& text, const string& vzorec) {
             counter1--;
         }
 
+        for (int j = 0; j < stringarray2->length(); ++j) {
+            reverseString(stringarray2[j]);
+        }
 
-}
-
+        
 
 int main(int argc, const char *const argv[]) {
     if (argc != 4) {
@@ -97,7 +108,7 @@ int main(int argc, const char *const argv[]) {
         KMP(text, vzorec);
     }
     else {
-        //sunday
+       //sunday
     }
 
 
