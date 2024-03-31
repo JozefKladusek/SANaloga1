@@ -35,6 +35,12 @@ string reverseString(std::string& str) {
     }
     return str;
 }
+void Izpis_Stevil(string* polje, unsigned int velikost) {
+    ofstream output("out.txt");
+
+    for (int i = 0; i<velikost; i++)
+        output << polje[i] << ' ';
+}
 
 void KMP(const string& text, const string& vzorec) {
     /*
@@ -89,7 +95,43 @@ void KMP(const string& text, const string& vzorec) {
             reverseString(stringarray2[j]);
         }
 
-        
+        int temp1 = i-1;
+        while(temp1>0)
+        {
+            int vrednosttemp=i-1;
+            for (int j = 0; j < temp1; ++j) {
+                string t1 = stringarray1[j];
+                string t2 = stringarray2[j];
+                //cout<<"\n1"<<t1<<"\n2"<<t2;
+                if(t1 == t2) {
+                    vrednostkmp=vrednosttemp;
+                    break;
+                }
+                vrednosttemp--;
+            }
+
+            temp1--;
+        }
+
+        kmpNext[i]=vrednostkmp;
+
+        /*cout<<"\nstringarray1\n";
+        for (int j = 0; j < stringarray1->length(); ++j) {
+            cout<<"\n"<<j<<"\n";
+            cout<<stringarray1[j];
+
+        }
+        cout<<"\nstringarray2\n";
+        for (int j = 0; j < stringarray2->length(); ++j) {
+            cout<<"\n"<<j<<"\n";
+            cout<<stringarray2[j];
+        }*/
+
+    }
+    
+
+}
+
 
 int main(int argc, const char *const argv[]) {
     if (argc != 4) {
@@ -108,7 +150,7 @@ int main(int argc, const char *const argv[]) {
         KMP(text, vzorec);
     }
     else {
-       //sunday
+        //sunday
     }
 
 
