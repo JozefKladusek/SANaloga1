@@ -200,7 +200,16 @@ void Sunday(const string& text, const string& vzorec){
         cout<<BHC[i];
     }
 
-   
+    int premik=0;
+    bool found = true;
+    bool premiknajden = false;
+    string najdeni="";
+    for (int i = 0; i < text.length()-vzorec.length(); i=i+premik) {
+        found = true;
+        premiknajden = false;
+        
+    }
+    Izpis_Stevil(&najdeni, 1);
 
 }
 
