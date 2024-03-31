@@ -128,7 +128,27 @@ void KMP(const string& text, const string& vzorec) {
         }*/
 
     }
-    
+    for (int i = 0; i < len; ++i) {
+        cout<<kmpNext[i];
+    }
+    int premik=0;
+    int d=0;
+    for (int i = 0; i < text.length(); i=i+premik) {
+        d=0;
+        for (int j = 0; j < len; ++j) {
+            if(vzorec[j] != text[i+j]){
+                premik = j - kmpNext[j];
+                d++;
+                break;
+            }
+        }
+        if(d==0){
+            najdeni.append(to_string(i)+" ");
+            premik = vzorec.length();
+        }
+
+    }
+    Izpis_Stevil(&najdeni, 1);
 
 }
 
