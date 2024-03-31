@@ -141,11 +141,6 @@ void KMP(const string& text, const string& vzorec) {
                 d++;
                 break;
             }
-            if(vzorec[j] != text[i+j]){
-                premik = j - kmpNext[j];
-                d++;
-                break;
-            }
         }
         if(d==0){
             najdeni.append(to_string(i)+" ");
@@ -212,7 +207,25 @@ void Sunday(const string& text, const string& vzorec){
     for (int i = 0; i < text.length()-vzorec.length(); i=i+premik) {
         found = true;
         premiknajden = false;
-        
+        for (int j = 0; j < vzorec.length(); ++j) {
+            if(vzorec[j]!=text[i+j]){
+                found = false;
+                for (int k = 0; k < carachters.size(); ++k) {
+                    if(text[i+j+1]==carachters[i]){
+                        premik=BHC[k];
+                        premiknajden=true;
+                        break;
+                    }
+                }
+
+            }
+        }
+        if(!premiknajden){
+            premik = vzorec.size();
+        }
+        if(found == true){
+            najdeni.append(to_string(i)+" ");
+        }
     }
     Izpis_Stevil(&najdeni, 1);
 
