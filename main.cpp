@@ -151,7 +151,24 @@ void KMP(const string& text, const string& vzorec) {
     Izpis_Stevil(&najdeni, 1);
 
 }
+void Sunday(const string& text, const string& vzorec){
+    string carachters="";
 
+    for (int i = 0; i < vzorec.length(); ++i) {
+        bool found = false;
+        for (int j = 0; j < carachters.length(); ++j) {
+            if (carachters[j] == vzorec[i]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            carachters += vzorec[i];
+        }
+    }
+    
+
+}
 
 int main(int argc, const char *const argv[]) {
     if (argc != 4) {
@@ -170,7 +187,7 @@ int main(int argc, const char *const argv[]) {
         KMP(text, vzorec);
     }
     else {
-        //sunday
+        Sunday(text,vzorec);
     }
 
 
