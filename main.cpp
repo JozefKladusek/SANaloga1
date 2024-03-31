@@ -141,6 +141,11 @@ void KMP(const string& text, const string& vzorec) {
                 d++;
                 break;
             }
+            if(vzorec[j] != text[i+j]){
+                premik = j - kmpNext[j];
+                d++;
+                break;
+            }
         }
         if(d==0){
             najdeni.append(to_string(i)+" ");
