@@ -166,6 +166,19 @@ void Sunday(const string& text, const string& vzorec){
             carachters += vzorec[i];
         }
     }
+    for (int i = 0; i < text.length(); ++i) {
+        bool found = false;
+        for (int j = 0; j < carachters.length(); ++j) {
+            if (carachters[j] == text[i]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            carachters += text[i];
+        }
+    }
+    cout<<carachters;
     
 
 }
