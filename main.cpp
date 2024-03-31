@@ -179,7 +179,28 @@ void Sunday(const string& text, const string& vzorec){
         }
     }
     cout<<carachters;
-    
+    int BHC[carachters.length()];
+    for (int i = 0; i < carachters.length(); ++i) {
+        bool found = false;
+        int counter = 1;
+        for (int j = vzorec.length()-1; j >= 0; --j) {
+
+            if(vzorec[j]==carachters[i]){
+                BHC[i]=counter;
+                found = true;
+                break;
+            }
+            counter++;
+        }
+        if(found == false){
+            BHC[i]=vzorec.length()+1;
+        }
+    }
+    for (int i = 0; i <  carachters.length(); ++i) {
+        cout<<BHC[i];
+    }
+
+   
 
 }
 
