@@ -1,5 +1,5 @@
 #include <iostream>
-#include "main.cpp" 
+#include "main.h" 
 
 void runTests() {
     // Test sestej function
@@ -20,9 +20,7 @@ void runTests() {
 
 }
 
-    int main() {
-   
+int main() {
     runTests();
     return 0;
-
 }
