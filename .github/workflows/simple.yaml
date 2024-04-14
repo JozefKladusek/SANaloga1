@@ -37,7 +37,12 @@ jobs:
             echo "Error: napaka.txt does not contain 'Obstaja', exiting workflow"
             exit 1
           fi
+          
+          g++ -c main.cpp -o main.o
+          g++ -c test_main.cpp -o test_main.o
+          g++ main.o test_main.o -o test_executable
 
+  
         
         
       
