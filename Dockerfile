@@ -1,10 +1,6 @@
-FROM gcc:latest
+FROM ubuntu:20.04 #
 
 WORKDIR /app
 
-COPY . .
-
-RUN g++ -o my_program main.cpp
-
-CMD ["./my_program"]
+CMD ["./test_executable"]
 
