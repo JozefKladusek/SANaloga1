@@ -34,7 +34,7 @@ jobs:
 
       - name: Check if napaka.txt has content "Obstaja"
         run: |
-          if ! grep -q "Obstajasasa" napaka.txt; then
+          if ! grep -q "Obstaja" napaka.txt; then
             echo "Error: napaka.txt does not contain 'Obstaja', exiting workflow"
             exit 1
           fi
