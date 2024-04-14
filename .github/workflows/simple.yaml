@@ -1,1 +1,45 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check if test scripts exist
+      run: |
+        if [ ! -f test_main.c ]; then
+          echo "Test script not found!" > error.txt
+          exit 1
+        fi
+    
+    - name: Compile code
+      run: gcc -o test_main test_main.c
+    
+    - name: Run tests
+      run: |
+        ./test_main > error.txt 2>&1
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: failure()
+
+    steps:
+    - name: Check error.txt for errors
+      run: |
+        if [ -s error.txt ]; then
+          echo "Tests failed, deployment aborted."
+          exit 1
+        fi
+
+    - name: Docker build and push
+      # Add your Docker build and push commands here
 
