@@ -1,34 +1,27 @@
-name: Github Actions Deploy Demo z uporabo akcije
+name: Docker Build and Push
 
-
-env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  REPONAME: ${{ secrets.REPO_NAME }}
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repozitorija
+      - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Trenutni čas
-        id: datum
-        run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
-      
-      - name: Potisni na docker hub z akcijo
-        uses: mr-smithers-excellent/docker-build-push@v6
-        with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-          registry: docker.io
-          dockerfile: Dockerfile
-          tags: $date
-          image: ${{env.DOCKER_USERNAME}}/${{ env.REPONAME }}
-          
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:$GITHUB_SHA .
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:$GITHUB_SHA
