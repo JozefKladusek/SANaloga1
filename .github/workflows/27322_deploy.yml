@@ -31,3 +31,4 @@ jobs:
           dockerfile: Dockerfile
           tags: $date
           image: ${{env.DOCKER_USERNAME}}/${{ env.REPONAME }}
+          
