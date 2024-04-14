@@ -34,7 +34,7 @@ jobs:
 
       - name: Check if napaka.txt has content
         run: |
-          if [ ! -s napaka.txt == "Obstaja"]; then
+          if [ ! -s napaka.txt == "Obstajaa"]; then
             echo "Error: napaka.txt is empty, exiting workflow"
             exit 1
           fi
