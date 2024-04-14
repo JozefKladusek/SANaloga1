@@ -42,6 +42,11 @@ void Izpis_Stevil(string* polje, unsigned int velikost) {
         output << polje[i] << ' ';
 }
 
+int cifra(int &a){
+  a = a+1;
+  return a;
+}
+
 void KMP(const string& text, const string& vzorec) {
     /*
      * implementacija algoritma KMP
