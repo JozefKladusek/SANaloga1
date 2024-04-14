@@ -38,12 +38,23 @@ jobs:
             exit 1
           fi
 
-      - name: Run tests
-        shell: bash
-        run: |
-          g++ -c main.cpp -o main.o
-          g++ -c test_main.cpp -o test_main.o
-          g++ main.o test_main.o -o test_executable
-          ./test_executable
+          build:
+          runs-on: ubuntu-latest
+
+          steps:  
+            - name: Check out repository
+            uses: actions/checkout@v2
+
+            - name: Compile main.cpp
+            run: g++ -c main.cpp -o main.o
+
+          - name: Compile test_main.cpp
+            run: g++ -c test_main.cpp -o test_main.o
+
+          - name: Link Object Files
+            run: g++ main.o test_main.o -o test_executable
+
+          - name: Run Tests
+            run: ./test_executable
         
       
