@@ -10,9 +10,10 @@ jobs:
       - name: Check if test_main.cpp exists
         run: |
           if [ ! -f test_main.cpp ]; then
-            echo "test_main.cpp not found, exiting workflow"
+            echo "test_main.cpp not found, exiting workflow" > napaka.txt
             exit 1
           fi
+          echo "Obstaja" > napaka.txt
 
       - name: Upload napaka.txt as an artifact
         uses: actions/upload-artifact@v4
