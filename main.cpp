@@ -243,7 +243,7 @@ void Sunday(const string& text, const string& vzorec){
 
 }
 
-int main(int argc, const char *const argv[]) {
+/*int main(int argc, const char *const argv[]) {
     if (argc != 4) {
         return -1;
     }
@@ -265,4 +265,4 @@ int main(int argc, const char *const argv[]) {
 
 
     return 0;
-}
+}*/

@@ -22,5 +22,6 @@ void runTests() {
 
 int main() {
     runTests();
+    int sum = sestej(3, 4);
     return 0;
 }
