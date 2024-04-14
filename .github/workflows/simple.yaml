@@ -30,10 +30,10 @@ jobs:
         with:
           name: naloga_pred
 
-      - name: Check if napaka.txt exists
+      - name: Check if napaka.txt has content
         run: |
-          if [ -f napaka.txt ]; then
-            echo "Error: napaka.txt found, exiting workflow"
+          if [ ! -s napaka.txt ]; then
+            echo "Error: napaka.txt is empty, exiting workflow"
             exit 1
           fi
 
