@@ -10,9 +10,10 @@ jobs:
       - name: Check if test_main.cpp exists
         run: |
           if [ ! -f test_main.cpp ]; then
-            echo "test_main.cpp not found, exiting workflow"
+            echo "test_main.cpp not found, exiting workflow" > napaka.txt
             exit 1
           fi
+          echo "Obstaja" > napaka.txt
 
       - name: Upload napaka.txt as an artifact
         uses: actions/upload-artifact@v4
@@ -30,14 +31,11 @@ jobs:
         with:
           name: naloga_pred
 
-      - name: Check if napaka.txt exists
+      - name: Check if napaka.txt has content "Obstaja"
         run: |
-          if [ -f napaka.txt ]; then
-            echo "Error: napaka.txt found, exiting workflow"
+          if ! grep -q "Obstaja" napaka.txt; then
+            echo "Error: napaka.txt does not contain 'Obstaja', exiting workflow"
             exit 1
           fi
 
-      - name: Run tests
-        run: |
-          # Command to compile and run tests goes here
-          echo "Running tests..."
+      
