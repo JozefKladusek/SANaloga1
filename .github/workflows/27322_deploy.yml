@@ -10,19 +10,16 @@ jobs:
   build_and_push_docker_image:
     runs-on: self-hosted
     steps:
-      - name: Checkout repozitorija
+      - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Trenutni čas
-        id: datum
-        run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
+      - name: Set current time
+        id: timestamp
+        run: echo "DATE=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
       
-      - name: Potisni na docker hub z akcijo
-        uses: mr-smithers-excellent/docker-build-push@v6
-        with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-          registry: docker.io
-          dockerfile: Dockerfile
-          tags: $date
-          image: ${{env.DOCKER_USERNAME}}/${{ env.REPONAME }}
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.REPONAME }}:${{ env.DATE }} .
+          docker push ${{ env.DOCKER_USERNAME }}/${{ env.REPONAME }}:${{ env.DATE }}
+        env:
+          DATE: ${{ steps.timestamp.outputs.DATE }}
