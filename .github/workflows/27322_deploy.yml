@@ -1,5 +1,8 @@
 name: Github Actions Deploy Demo z uporabo akcije
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_NAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 on:
   workflow_run:
     workflows: ["CI"]
@@ -12,15 +15,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Set current time
-        id: timestamp
-        run: echo "DATE=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
+
+      - name: Prijava v Docker
+        run: |
+          sudo docker login
       
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.REPONAME }}:${{ env.DATE }} .
-          docker push ${{ env.DOCKER_USERNAME }}/${{ env.REPONAME }}:${{ env.DATE }}
-        env:
-          DATE: ${{ steps.timestamp.outputs.DATE }}
+          sudo docker build -t ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }} .
+          sudo docker push ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }}
+        
 
