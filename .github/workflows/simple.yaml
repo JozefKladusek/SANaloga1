@@ -30,7 +30,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: naloga_pred
-          path: .
 
       - name: Check if napaka.txt has content "Obstaja"
         run: |
