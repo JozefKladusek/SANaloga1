@@ -42,9 +42,15 @@ void Izpis_Stevil(string* polje, unsigned int velikost) {
         output << polje[i] << ' ';
 }
 
-int cifra(int &a){
-  a = a+1;
-  return a;
+void Izpis_Stevil1(string* polje, unsigned int velikost) {
+    ofstream output("out.txt");
+
+    for (int i = 0; i<velikost; i++)
+        output << polje[i] << ' ';
+}
+
+int sestej(int a, int b) {
+    return a + b;
 }
 
 void KMP(const string& text, const string& vzorec) {
