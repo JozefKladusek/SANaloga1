@@ -41,5 +41,5 @@ jobs:
 
       - name: Run tests
         run: |
-          # Command to compile and run tests goes here
-          echo "Running tests..."
+          g++ -o test_main test_main.cpp main.cpp
+          ./test_main
