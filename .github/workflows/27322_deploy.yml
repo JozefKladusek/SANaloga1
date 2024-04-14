@@ -25,4 +25,3 @@ jobs:
           sudo docker build -t ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }} .
           sudo docker push ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }}
         
-
