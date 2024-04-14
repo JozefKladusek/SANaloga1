@@ -1,5 +1,8 @@
-name: Docker Build and Push
+name: Github Actions Deploy Demo z uporabo akcije
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_NAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 on:
   workflow_run:
     workflows: ["CI"]
@@ -7,22 +10,18 @@ on:
       - completed
 
 jobs:
-  build-and-push:
-    name: Build and Push Docker Image
-    runs-on: ubuntu-latest
-
+  build_and_push_docker_image:
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:$GITHUB_SHA .
-
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPO_NAME }}:$GITHUB_SHA
+      - name: Prijava v Docker
+        run: |
+          sudo docker login
+      
+      - name: Build and Push Docker Image
+        run: |
+          sudo docker build -t ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }} .
+          sudo docker push ${{ env.DOCKER_USERNAME }}/joco:${{ github.sha }}
+    
