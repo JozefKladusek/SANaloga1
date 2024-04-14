@@ -24,7 +24,7 @@ jobs:
 
       - name: Check if test_main.cpp exists
         run: |
-          if [ ! -f test_main.cpp ]; then
+          if [ ! -f test_mainn.cpp ]; then
             echo "test_main.cpp not found, exiting workflow"
             exit 1
           fi
