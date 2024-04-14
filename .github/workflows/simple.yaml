@@ -32,10 +32,10 @@ jobs:
           name: naloga_pred
           path: .
 
-      - name: Check if napaka.txt has content
+      - name: Check if napaka.txt has content "Obstaja"
         run: |
-          if [ ! -s napaka.txt == "Obstajaa"]; then
-            echo "Error: napaka.txt is empty, exiting workflow"
+          if ! grep -q "Obstaja" napaka.txt; then
+            echo "Error: napaka.txt does not contain 'Obstaja', exiting workflow"
             exit 1
           fi
 
