@@ -242,7 +242,7 @@ void Sunday(const string& text, const string& vzorec){
     Izpis_Stevil(&najdeni, 1);
 
 }
-//komentar1234
+//komentar12345
 /*int main(int argc, const char *const argv[]) {
     if (argc != 4) {
         return -1;
