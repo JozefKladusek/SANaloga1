@@ -7,6 +7,9 @@ jobs:
     name: Check if test_main.cpp exists
     runs-on: self-hosted
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check if test_main.cpp exists
         run: |
           if [ ! -f test_main.cpp ]; then
@@ -26,6 +29,9 @@ jobs:
     runs-on: self-hosted
     needs: posel_1
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download napaka.txt artifact from posel_1
         uses: actions/download-artifact@v4
         with:
@@ -37,6 +43,7 @@ jobs:
             echo "Error: napaka.txt does not contain 'Obstaja', exiting workflow"
             exit 1
           fi
+
       - name: Compile C++ code
         run: |
           g++ -c main.cpp -o main.o
